@@ -2,6 +2,24 @@ package com.example.iterable;
 
 import java.util.Iterator;
 
+/**
+ * Output:
+ *
+ * Apple
+ * Orange
+ * Banana
+ * Tangerine
+ * Peach
+ *
+ * Empty? false
+ * Bag size: 5
+ *
+ * Apple
+ * Orange
+ * Banana
+ * Tangerine
+ * Peach
+ */
 public class BagManager {
     public static void main(String[] args) {
 
