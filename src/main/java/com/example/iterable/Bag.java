@@ -3,6 +3,8 @@ package com.example.iterable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 public class Bag<T> implements Container<T> {
 
@@ -30,5 +32,23 @@ public class Bag<T> implements Container<T> {
     @Override
     public Iterator<T> iterator() {
         return this.contents.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super T> action) {
+        this.contents.forEach(action);
+    }
+
+    @Override
+    public Spliterator<T> spliterator() {
+        return this.contents.spliterator();
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Bag {");
+        sb.append("contents=").append(contents);
+        sb.append('}');
+        return sb.toString();
     }
 }
