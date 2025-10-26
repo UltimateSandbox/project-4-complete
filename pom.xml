@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>project-3-complete</artifactId>
+    <artifactId>project-4-complete</artifactId>
     <version>1.0.0</version>
-    <name>Project 3</name>
-    <description>Project 3 Complete</description>
+    <name>Project 4</name>
+    <description>Project 4 Complete</description>
 
     <properties>
         <java.version>21</java.version>

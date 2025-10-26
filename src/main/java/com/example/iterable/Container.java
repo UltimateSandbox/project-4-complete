@@ -1,9 +1,11 @@
 package com.example.iterable;
 
-public interface Container<T> extends Iterable<T> {
+public interface Container<E> extends Iterable<E> {
 
+    void add(E item);
+    boolean remove(E item);
+    boolean contains(E item);
     int size();
-    void add(T item);
     boolean isEmpty();
 
 }

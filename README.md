@@ -19,11 +19,11 @@ This project introduces AI-assisted software development by having you use AI to
 4. The Container interface included in the template is defined as follows:
 ```java
 public interface Container<E> extends Iterable<E> {
-    boolean isEmpty();
-    int size();
     void add(E item);
-    E remove(E item);
+    boolean remove(E item);
     boolean contains(E item);
+    int size();
+    boolean isEmpty();
 }
 ```
 5. Your Bag implementation ***must*** use the Java ArrayList as the backing data structure. You will lose points if you do not use an ArrayList.

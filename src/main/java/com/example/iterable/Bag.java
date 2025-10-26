@@ -6,41 +6,51 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class Bag<T> implements Container<T> {
+public class Bag<E> implements Container<E> {
 
-    private List<T> contents;
+    private List<E> contents;
 
     public Bag() {
         this.contents = new ArrayList<>();
     }
 
     @Override
-    public boolean isEmpty() {
-        return contents.isEmpty();
-    }
-
-    @Override
-    public int size() {
-        return contents.size();
-    }
-
-    @Override
-    public void add(T item) {
+    public void add(E item) {
         this.contents.add(item);
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public boolean remove(E item) {
+        return this.contents.remove(item);
+    }
+
+    @Override
+    public boolean contains(E item) {
+        return this.contents.contains(item);
+    }
+
+    @Override
+    public int size() {
+        return this.contents.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.contents.isEmpty();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
         return this.contents.iterator();
     }
 
     @Override
-    public void forEach(Consumer<? super T> action) {
+    public void forEach(Consumer<? super E> action) {
         this.contents.forEach(action);
     }
 
     @Override
-    public Spliterator<T> spliterator() {
+    public Spliterator<E> spliterator() {
         return this.contents.spliterator();
     }
 

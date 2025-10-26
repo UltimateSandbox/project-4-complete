@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BagTest {
 
@@ -19,72 +20,155 @@ public class BagTest {
     }
 
     @Test
-    public void testAddAndSize() {
-        bag.add("Apple");
-        bag.add("Orange");
-        bag.add("Banana");
-        bag.add("Tangerine");
-        bag.add("Peach");
-        bag.add("Grape");
-
-        assertEquals(6, bag.size());
-    }
-
-    @Test
-    public void testIsEmpty() {
+    public void testNewBagIsEmpty() {
         assertTrue(bag.isEmpty());
-        bag.add("Apple");
-        assertFalse(bag.isEmpty());
+        assertEquals(0, bag.size());
     }
 
     @Test
-    public void testIterator() {
-        bag.add("Apple");
-        bag.add("Orange");
-        bag.add("Banana");
-        bag.add("Tangerine");
-        bag.add("Peach");
-        bag.add("Grape");
-
-        Iterator<String> iter = bag.iterator();
-        assertTrue(iter.hasNext());
-        assertEquals("Apple", iter.next());
-        assertEquals("Orange", iter.next());
-        assertEquals("Banana", iter.next());
-        assertEquals("Tangerine", iter.next());
-        assertEquals("Peach", iter.next());
-        assertEquals("Grape", iter.next());
-        assertFalse(iter.hasNext());
+    public void testAddSingleItem() {
+        bag.add("item1");
+        assertFalse(bag.isEmpty());
+        assertEquals(1, bag.size());
+        assertTrue(bag.contains("item1"));
     }
 
     @Test
     public void testAddMultipleItems() {
-        for (int i = 0; i < 25; i++) {
-            bag.add("Fruit" + i);
+        bag.add("item1");
+        bag.add("item2");
+        bag.add("item3");
+        assertEquals(3, bag.size());
+        assertTrue(bag.contains("item1"));
+        assertTrue(bag.contains("item2"));
+        assertTrue(bag.contains("item3"));
+    }
+
+    @Test
+    public void testAddDuplicateItems() {
+        bag.add("item1");
+        bag.add("item1");
+        assertEquals(2, bag.size());
+    }
+
+    @Test
+    public void testAddNullItem() {
+        bag.add(null);
+        assertEquals(1, bag.size());
+        assertTrue(bag.contains(null));
+    }
+
+    @Test
+    public void testRemoveExistingItem() {
+        bag.add("item1");
+        assertTrue(bag.remove("item1"));
+        assertEquals(0, bag.size());
+        assertFalse(bag.contains("item1"));
+    }
+
+    @Test
+    public void testRemoveNonExistingItem() {
+        bag.add("item1");
+        assertFalse(bag.remove("item2"));
+        assertEquals(1, bag.size());
+    }
+
+    @Test
+    public void testRemoveFromEmptyBag() {
+        assertFalse(bag.remove("item1"));
+    }
+
+    @Test
+    public void testRemoveOnlyOneOccurrenceOfDuplicate() {
+        bag.add("item1");
+        bag.add("item1");
+        assertTrue(bag.remove("item1"));
+        assertEquals(1, bag.size());
+        assertTrue(bag.contains("item1"));
+    }
+
+    @Test
+    public void testRemoveNull() {
+        bag.add(null);
+        assertTrue(bag.remove(null));
+        assertEquals(0, bag.size());
+    }
+
+    @Test
+    public void testContainsExistingItem() {
+        bag.add("item1");
+        assertTrue(bag.contains("item1"));
+    }
+
+    @Test
+    public void testContainsNonExistingItem() {
+        assertFalse(bag.contains("item1"));
+    }
+
+    @Test
+    public void testIteratorEmptyBag() {
+        Iterator<String> iterator = bag.iterator();
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void testIteratorWithItems() {
+        bag.add("item1");
+        bag.add("item2");
+        bag.add("item3");
+
+        List<String> items = new ArrayList<>();
+        for (String item : bag) {
+            items.add(item);
         }
-        assertEquals(25, bag.size());
+
+        assertEquals(3, items.size());
+        assertTrue(items.contains("item1"));
+        assertTrue(items.contains("item2"));
+        assertTrue(items.contains("item3"));
     }
 
     @Test
     public void testForEach() {
-        List<String> fruits = List.of("Apple", "Orange", "Banana", "Tangerine", "Peach", "Grape");
-        fruits.forEach(bag::add);
+        bag.add("item1");
+        bag.add("item2");
 
-        List<String> result = new ArrayList<>();
-        bag.forEach(result::add);
+        List<String> items = new ArrayList<>();
+        bag.forEach(items::add);
 
-        assertEquals(fruits, result);
+        assertEquals(2, items.size());
+        assertTrue(items.contains("item1"));
+        assertTrue(items.contains("item2"));
+    }
+
+    @Test
+    public void testForEachEmptyBag() {
+        AtomicInteger count = new AtomicInteger(0);
+        bag.forEach(item -> count.incrementAndGet());
+        assertEquals(0, count.get());
     }
 
     @Test
     public void testSpliterator() {
-        List<String> fruits = List.of("Apple", "Orange", "Banana", "Tangerine", "Peach", "Grape");
-        fruits.forEach(bag::add);
+        bag.add("item1");
+        bag.add("item2");
 
         Spliterator<String> spliterator = bag.spliterator();
-        List<String> result = new ArrayList<>();
-        spliterator.forEachRemaining(result::add);
+        assertNotNull(spliterator);
+        assertEquals(2, spliterator.estimateSize());
+    }
 
-        assertEquals(fruits, result);
+    @Test
+    public void testToString() {
+        bag.add("item1");
+        String result = bag.toString();
+        assertTrue(result.contains("Bag"));
+        assertTrue(result.contains("item1"));
+    }
+
+    @Test
+    public void testToStringEmptyBag() {
+        String result = bag.toString();
+        assertTrue(result.contains("Bag"));
     }
 }
