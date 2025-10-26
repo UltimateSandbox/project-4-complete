@@ -34,7 +34,7 @@ public interface Container<E> extends Iterable<E> {
 10. Be prepared to explain your prompt strategy and any modifications you made to the AI-generated code.
 
 ## Extra Credit
-- For 10 points extra credit, implement the forEach and spliterator methods of the Iterable interface using AI assistance.
+- For extra credit, implement the forEach and spliterator methods of the Iterable interface using AI assistance.
 
 ## Project Hints
 
@@ -43,3 +43,53 @@ public interface Container<E> extends Iterable<E> {
 - **Iterative Refinement**: Don't accept the first generation—ask the AI to improve specific aspects if needed.
 - **Test Coverage**: When generating tests, explicitly request coverage of empty bags, single items, multiple items, removal scenarios, and iterator behavior.
 - Remember the facade pattern from Stack and Queue—this is the same concept applied to ArrayList.
+
+## Grading Rubric - AI-Assisted Container Implementation
+
+### Core Implementation (60%)
+
+- **Code Compiles Successfully** (10%)
+    - Project builds without errors
+
+- **Bag Class Implementation** (25%)
+    - Implements Container<E> interface (5%)
+    - Uses ArrayList as backing data structure (10%)
+    - All required methods implemented (isEmpty, size, add, remove, contains) (10%)
+
+- **Iterator Implementation** (15%)
+    - Implements Iterable<E> interface (5%)
+    - Iterator hasNext() works correctly (5%)
+    - Iterator next() works correctly (5%)
+
+- **Generic Type Handling** (10%)
+    - Proper use of generic type parameter <E> throughout
+
+### Testing (25%)
+
+- **Unit Tests Present** (10%)
+    - Test class exists and compiles
+
+- **Test Coverage** (15%)
+    - Tests for empty bag operations (3%)
+    - Tests for add/remove/contains operations (5%)
+    - Tests for iterator functionality (4%)
+    - Tests for edge cases (null handling, remove non-existent items, etc.) (3%)
+
+### Code Quality (15%)
+
+- **Code Correctness** (10%)
+    - Methods behave as expected
+    - No runtime errors during normal operations
+
+- **Code Organization** (5%)
+    - Reasonable variable names
+    - Basic code structure and readability
+
+### Extra Credit (10%)
+
+- **forEach Implementation** (5%)
+- **spliterator Implementation** (5%)
+
+---
+
+**Total: 100% + 10% Extra Credit**
