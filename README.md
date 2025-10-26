@@ -48,20 +48,24 @@ public interface Container<E> extends Iterable<E> {
 
 ### Core Implementation (60%)
 
+- **Documentation and Comments** (10%)
+    - The AI_INTERACTION_LOG.md file is present and details the prompts used and modifications made. (5%)
+    - The REFLECTION.md file is present and discusses the experience with AI assistance. (5%)
+
 - **Code Compiles Successfully** (10%)
     - Project builds without errors
 
-- **Bag Class Implementation** (25%)
+- **Bag Class Implementation** (20%)
     - Implements Container<E> interface (5%)
     - Uses ArrayList as backing data structure (10%)
-    - All required methods implemented (isEmpty, size, add, remove, contains) (10%)
+    - All required methods implemented (isEmpty, size, add, remove, contains) (5%)
 
 - **Iterator Implementation** (15%)
     - Implements Iterable<E> interface (5%)
     - Iterator hasNext() works correctly (5%)
     - Iterator next() works correctly (5%)
 
-- **Generic Type Handling** (10%)
+- **Generic Type Handling** (5%)
     - Proper use of generic type parameter <E> throughout
 
 ### Testing (25%)
